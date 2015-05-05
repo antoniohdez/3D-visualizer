@@ -50,8 +50,6 @@ var sides = {
 
 rubik = drawCube(rubik);
 
-console.log(rubik.children);
-
 scene.add(rubik);
 
 /*

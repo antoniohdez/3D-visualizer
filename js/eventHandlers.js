@@ -1,8 +1,43 @@
-var rotateCamera = function (angle){
-	rubik.rotation.y += angle*(Math.PI/180);
+var zoomCamera = function (zoom){
+	//camera.position.z += zoom;
 }
 
+var rotateCamera = function (angle){
+	scene.rotation.y += angle*(Math.PI/180);
+}
+
+/*
+	ID for interval
+*/
 var interval;
+
+/*
+	Zoom events
+*/
+
+var zoomInDown = function (){
+	interval = setInterval(function (){
+		zoomCamera(-0.1);
+	}, 25);
+}
+
+var zoomInUp = function (){
+	clearInterval(interval)
+}
+
+var zoomOutDown = function (){
+	interval = setInterval(function (){
+		zoomCamera(0.1);
+	}, 25);
+}
+
+var zoomOutUp = function (){
+	clearInterval(interval);
+}
+
+/*
+	Rotation events
+*/
 
 var leftRotationDown = function (){
 	interval = setInterval(function (){
