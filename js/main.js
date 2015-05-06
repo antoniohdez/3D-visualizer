@@ -6,7 +6,7 @@ var scene = new THREE.Scene();
 	Near: Distance at which the camera will start rendering scene objects.
 	Far: Anything beyond this distance will not be rendered, draw distance.
 */
-var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 100 );
+var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 1000 );
 camera.position.z = 10;
 
 //Look at (0,0,0)
@@ -31,26 +31,21 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 /*
-	CUBE
+	LOADER FOR OBJ FILES
 */
 
-//Root element
-var rubik = new THREE.Object3D();
+var manager = new THREE.LoadingManager();
+manager.onProgress = function ( item, loaded, total ) {
+	console.log( item, loaded, total );
+};
 
-//Faces
-var sides = {
-	"white"  : new THREE.Object3D(),
-	"yellow" : new THREE.Object3D(),
-	"green"  : new THREE.Object3D(),
-	"blue"   : new THREE.Object3D(),
-	"red"    : new THREE.Object3D(),
-	"orange" : new THREE.Object3D()
-}
+var loader = new THREE.OBJLoader( manager );
+loader.load( 'test.obj', function ( object ) {
+	object.traverse( function ( child ){});
 
-
-rubik = drawCube(rubik);
-
-scene.add(rubik);
+	console.log( object );
+	scene.add( object );
+});
 
 /*
 	AMBIENT LIGHT
