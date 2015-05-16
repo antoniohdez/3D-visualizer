@@ -7,7 +7,7 @@ var scene = new THREE.Scene();
 	Far: Anything beyond this distance will not be rendered, draw distance.
 */
 var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 1000 );
-camera.position.z = 10;
+camera.position.z = 100;
 
 //Look at (0,0,0)
 //camera.lookAt(scene.position);
@@ -19,6 +19,13 @@ camera.position.z = 10;
 //Move around Y axis by default
 var controls = new THREE.OrbitControls( camera );
 controls.addEventListener('change', render );
+
+/*
+	AMBIENT LIGHT
+*/
+
+var ambientLight = new THREE.AmbientLight(0xFFFFFF);
+scene.add(ambientLight);
 
 /*
 	RENDERER (CANVAS)
@@ -34,25 +41,19 @@ document.body.appendChild( renderer.domElement );
 	LOADER FOR OBJ FILES
 */
 
-var manager = new THREE.LoadingManager();
-manager.onProgress = function ( item, loaded, total ) {
-	console.log( item, loaded, total );
-};
+var loader = new THREE.OBJMTLLoader();
+loader.load('obj/Ladder.obj', 'obj/Ladder.mtl', function(object) {
+	
+	object.position.x = 0;
+	object.position.y = 0;
+	object.position.z = 0;
+	object.scale.set(1, 1, 1);
 
-var loader = new THREE.OBJLoader( manager );
-loader.load( 'test.obj', function ( object ) {
-	object.traverse( function ( child ){});
+	console.log(object);
 
-	console.log( object );
-	scene.add( object );
+	scene.add(object);
 });
 
-/*
-	AMBIENT LIGHT
-*/
-
-var ambientLight = new THREE.AmbientLight(0xFFFFFF);
-scene.add(ambientLight);
 
 /*
 	RENDER
