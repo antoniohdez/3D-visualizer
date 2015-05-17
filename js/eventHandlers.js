@@ -63,6 +63,31 @@ var rightRotationUp = function (){
 	Loader events
 */
 
-var loadObj = function(){
-	alert("Load obj");
+var loadObj = function(e){
+	if( e.target.files.length == 0 ){
+		alert("Empty");
+	}else{
+		
+		var input = document.getElementById('obj-loader');
+		var files = input.files;
+		var formData = new FormData();
+
+		var file = files[0];
+		formData.append('obj_file', file, file.name);
+
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'obj_handler.php', true);
+
+		xhr.onload = function () {
+			console.log(xhr);
+			if (xhr.status === 200) {
+				console.log("Upload success");
+			} else {
+				console.log('An error occurred!');
+			}
+		};
+
+		xhr.send(formData);
+
+	}
 }

@@ -22,10 +22,10 @@ var createZoomMenu = function(){
 		zoomInButton.addEventListener("mouseup", zoomInUp);
 		zoomInButton.addEventListener("mouseleave", zoomInUp);
 
-		var tmpDiv = document.createElement("div");
-		tmpDiv.appendChild(zoomInButton);
+		var container = document.createElement("div");
+		container.appendChild(zoomInButton);
 
-		return tmpDiv;
+		return container;
 	})();
 
 	/* 
@@ -112,6 +112,7 @@ var createLoaderMenu = function(){
 
 	var objButton = (function(){
 		var objButton = document.createElement("input");
+		objButton.id = "obj-loader"
 		objButton.type = "file";
 
 		//objButton.addEventListener("click", loadObj);
