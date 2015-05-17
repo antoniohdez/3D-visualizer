@@ -63,9 +63,24 @@ var rightRotationUp = function (){
 	Loader events
 */
 
+var token;
+
+var showMtl = function(show){
+	var mtl = document.getElementById("mtl-loader");
+	if(show){
+		mtl.style.display = "inline-block";	
+	}else{
+		mtl.style.display = "none";	
+	}
+}
+
+var loadMtl = function(){
+
+}
+
 var loadObj = function(e){
 	if( e.target.files.length == 0 ){
-		alert("Empty");
+		showMtl(false);
 	}else{
 		
 		var input = document.getElementById('obj-loader');
@@ -81,7 +96,11 @@ var loadObj = function(e){
 		xhr.onload = function () {
 			console.log(xhr);
 			if (xhr.status === 200) {
+				token = xhr.responseText;
 				console.log("Upload success");
+
+				showMtl(true);
+
 			} else {
 				console.log('An error occurred!');
 			}
