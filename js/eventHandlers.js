@@ -58,3 +58,11 @@ var rightRotationDown = function (){
 var rightRotationUp = function (){
 	clearInterval(interval);
 }
+
+/*
+	Loader events
+*/
+
+var loadObj = function(){
+	alert("Load obj");
+}

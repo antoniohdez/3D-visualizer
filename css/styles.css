@@ -7,7 +7,7 @@ canvas {
 	width: 100%;
 }
 
-button{
+button, .file-input{
 	background: #5BC0DE;
 	border: 0;
 	color: white;
@@ -16,29 +16,36 @@ button{
 	margin: .5em;
 }
 
-button:hover{
+button:hover, .file-input:hover{
 	background: #39B3D7;
 }
 
-.top-left-menu{
-	position: absolute;
-	right: 1em;
-	top: 1em;
+.file-input{
+	display: inline-block;
+}
+
+.file-input > input{
+	display: none;
 }
 
 .zoom-menu{
-	
+	position: absolute;
+	right: 1em;
+	top: 1em;
 }
 
 .zoom-menu > div{
 	text-align: center;
 }
 
-.zoom-menu button{
-	
-
+.rotation-menu{
+	position: absolute;
+	right: 1em;
+	top: 1em;
 }
 
-.rotation-menu{
-
+.loader-menu{
+	position: absolute;
+	left: 1em;
+	bottom: 1em;
 }
