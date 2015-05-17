@@ -1,9 +1,9 @@
 /*
 	LOADER FOR OBJ/MTL FILES
 */
-var loader = function(){
+var loader = function(url, mtlUrl){
 	var loader = new THREE.OBJMTLLoader();
-	loader.load('obj/Ladder.obj', 'obj/Ladder.mtl', function(object) {
+	loader.load(url, mtlUrl, function(object) {
 
 		console.log(object);
 		
@@ -16,6 +16,3 @@ var loader = function(){
 		
 	});	
 }
-
-// Temp call to method, delete when loadObj event handler is clompleted
-loader();

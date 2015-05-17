@@ -99,7 +99,11 @@ var loadObj = function(e){
 				token = xhr.responseText;
 				console.log("Upload success");
 
+				var objUrl = "uploads/" + token + "/" + file.name;
+				loader(objUrl, "");
+
 				showMtl(true);
+
 
 			} else {
 				console.log('An error occurred!');
