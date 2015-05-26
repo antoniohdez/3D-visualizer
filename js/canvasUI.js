@@ -122,7 +122,7 @@ var createLoaderMenu = function(){
 		var icon = document.createElement("i");
 		icon.className = "fa fa-upload";
 		
-		var text = document.createTextNode(" Cargar modelo .obj");
+		var text = document.createTextNode(" Cargar modelo desde .zip");
 
 		var inputContainer = document.createElement("span");
 		inputContainer.className = "file-input";
@@ -139,41 +139,9 @@ var createLoaderMenu = function(){
 		return inputContainer;
 	})();
 
-	var mtlButton = (function(){
-		var mtlButton = document.createElement("input");
-		mtlButton.id = "mtl-loader"
-		mtlButton.type = "file";
-
-		//objButton.addEventListener("click", loadObj);
-
-		mtlButton.addEventListener("change", loadMtl);
-
-		var icon = document.createElement("i");
-		icon.className = "fa fa-upload";
-		
-		var text = document.createTextNode(" Cargar textura .mtl");
-
-		var inputContainer = document.createElement("span");
-		inputContainer.className = "file-input";
-		
-		inputContainer.appendChild(mtlButton);
-		inputContainer.appendChild(icon);
-		inputContainer.appendChild(text);
-
-		
-		inputContainer.addEventListener("click", function(){
-			mtlButton.click();
-		});
-
-		inputContainer.style.display = "none";
-
-		return inputContainer;
-	})();
-
 	/* Add buttons to loader menu */
 
 	loaderMenu.appendChild(objButton);
-	loaderMenu.appendChild(mtlButton);
 
 	document.body.appendChild(loaderMenu);
 }
