@@ -85,7 +85,11 @@ var loadObj = function(e){
 	var file = files[0];
 
 	if( validateFileExtension(file.name) === false ){
-		alert("Seleccionar una archivo .zip válido");		
+		swal({
+			title: "Selecciona un archivo .zip válido", 
+			type: "warning"
+		});
+		return;
 	}
 
 	var formData = new FormData();
@@ -105,6 +109,10 @@ var loadObj = function(e){
 			loader(objUrl, "");
 
 		} else {
+			swal({
+				title: "Ocurrió un error, intenta de nuevo", 
+				type: "error"
+			});
 			console.log('An error occurred!');
 		}
 	};

@@ -40,7 +40,6 @@ document.body.appendChild( renderer.domElement );
 /*
 	RENDER
 */
-console.log(camera);
 
 var render = function () {
 	requestAnimationFrame( render );
