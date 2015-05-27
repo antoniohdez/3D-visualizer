@@ -104,9 +104,10 @@ var loadObj = function(e){
 		if (xhr.status === 200) {
 			token = xhr.responseText;
 			console.log("Upload success");
+			console.log(token.responseText);
 
-			var objUrl = "uploads/" + token + "/" + file.name;
-			loader(objUrl, "");
+			//var objUrl = "uploads/" + token + "/" + file.name;
+			//loader(objUrl, "");
 
 		} else {
 			swal({
