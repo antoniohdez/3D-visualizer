@@ -4,7 +4,8 @@
 
 var createZoomMenu = function(){
 	var zoomMenu = document.createElement("div");
-	zoomMenu.className = "zoom-menu";
+	zoomMenu.id = "zoom-menu";
+	zoomMenu.className = "zoom-menu hidden";
 
 	/* 
 		Zoom in button 
@@ -60,7 +61,8 @@ var createZoomMenu = function(){
 
 var createRotationMenu = function(){
 	var rotationMenu = document.createElement("div");
-	rotationMenu.className = "rotation-menu";
+	rotationMenu.id = "rotation-menu";
+	rotationMenu.className = "rotation-menu hidden";
 
 	/* Left rotation button */
 

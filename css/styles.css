@@ -7,6 +7,10 @@ canvas {
 	width: 100%;
 }
 
+.hidden{
+	display: none !important;
+}
+
 button, .file-input{
 	background: #297FD5;
 	border: 0;

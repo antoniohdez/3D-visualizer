@@ -92,7 +92,11 @@ var loadObj = function(e){
 		return;
 	}
 
-	document.getElementById('file-text').innerHTML = "&nbsp; Loading...";
+	var animatedLoader = document.getElementById('loader-animated');
+	animatedLoader.className = animatedLoader.className.replace(" hidden", "");
+
+	var fileButton = document.getElementById('file-button');
+	fileButton.className = fileButton.className + " hidden";
 
 	var formData = new FormData();
 	// User obj-loader (button) to load a .zip file
@@ -108,6 +112,9 @@ var loadObj = function(e){
 			console.log("Upload success");
 			console.log(token.responseText);
 
+			var menu = document.getElementById("rotation-menu");
+			menu.className = menu.className.replace("hidden", "");
+
 			//var objUrl = "uploads/" + token + "/" + file.name;
 			//loader(objUrl, "");
 
@@ -118,8 +125,8 @@ var loadObj = function(e){
 			});
 			console.log('An error occurred!');
 		}
-		var text = document.getElementById("file-text");
-		text.innerHTML = "&nbsp; Cargar modelo desde .zip"
+		fileButton.className = fileButton.className.replace(" hidden", "");
+		animatedLoader.className = animatedLoader.className + " hidden";
 	};
 
 	xhr.send(formData);

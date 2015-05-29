@@ -1,0 +1,73 @@
+.load-bar {
+    position: relative;
+    margin-top: 0;
+    width: 100%;
+    height: 6px;
+    background-color: #fdba2c;
+}
+
+.bar {
+    content: "";
+    display: inline;
+    position: absolute;
+    width: 0;
+    height: 100%;
+    left: 50%;
+    text-align: center;
+}
+
+.bar:nth-child(1) {
+    background-color: #da4733;
+    -webkit-animation: loading 4s linear infinite;
+    -moz-animation: loading 4s linear infinite;
+    -o-animation: loading 4s linear infinite;
+    animation: loading 4s linear infinite;
+}
+
+.bar:nth-child(2) {
+    background-color: #3b78e7;
+    -webkit-animation: loading 4s linear 1s infinite;
+    -moz-animation: loading 4s linear 1s infinite;
+    -o-animation: loading 4s linear 1s infinite;
+    animation: loading 4s linear 1s infinite;
+}
+
+.bar:nth-child(3) {
+    background-color: #fdba2c;
+    -webkit-animation: loading 4s linear 2s infinite;
+    -moz-animation: loading 4s linear 2s infinite;
+    -o-animation: loading 4s linear 2s infinite;
+    animation: loading 4s linear 2s infinite;
+}
+
+.bar:nth-child(4) {
+    background-color: #008d29;
+    -webkit-animation: loading 4s linear 3s infinite;
+    -moz-animation: loading 4s linear 3s infinite;
+    -o-animation: loading 4s linear 3s infinite;
+    animation: loading 4s linear 3s infinite;
+}
+
+@-webkit-keyframes loading {
+    from {left: 50%; width: 0;z-index:100;}
+    25% {left: 0; width: 100%;z-index: 10;}
+    to {left: 0; width: 100%;}
+}
+
+@-moz-keyframes loading {
+    from {left: 50%; width: 0;z-index:100;}
+    25% {left: 0; width: 100%;z-index: 10;}
+    to {left: 0; width: 100%;}
+}
+
+@-o-keyframes loading {
+    from {left: 50%; width: 0;z-index:100;}
+    25% {left: 0; width: 100%;z-index: 10;}
+    to {left: 0; width: 100%;}
+}
+
+@keyframes loading {
+    from {left: 50%; width: 0;z-index:100;}
+    25% {left: 0; width: 100%;z-index: 10;}
+    to {left: 0; width: 100%;}
+}
