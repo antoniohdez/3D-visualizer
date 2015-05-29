@@ -120,11 +120,15 @@ var createLoaderMenu = function(){
 		objButton.addEventListener("change", loadObj);
 
 		var icon = document.createElement("i");
+		icon.id = "file-icon";
 		icon.className = "fa fa-upload";
 		
-		var text = document.createTextNode(" Cargar modelo desde .zip");
+		var text = document.createElement("span");
+		text.id = "file-text";
+		text.innerHTML = "&nbsp; Cargar modelo desde .zip"
 
 		var inputContainer = document.createElement("span");
+		inputContainer.id = "file-button";
 		inputContainer.className = "file-input";
 		
 		inputContainer.appendChild(objButton);

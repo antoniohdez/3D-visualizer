@@ -92,6 +92,8 @@ var loadObj = function(e){
 		return;
 	}
 
+	document.getElementById('file-text').innerHTML = "&nbsp; Loading...";
+
 	var formData = new FormData();
 	// User obj-loader (button) to load a .zip file
 	formData.append('zip_file', file, file.name);
@@ -116,6 +118,8 @@ var loadObj = function(e){
 			});
 			console.log('An error occurred!');
 		}
+		var text = document.getElementById("file-text");
+		text.innerHTML = "&nbsp; Cargar modelo desde .zip"
 	};
 
 	xhr.send(formData);

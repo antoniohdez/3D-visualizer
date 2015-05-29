@@ -33,7 +33,7 @@ scene.add(ambientLight);
 
 //Create html element (canvas)
 var renderer = new THREE.WebGLRenderer();
-renderer.setClearColor( 0xCCCCCC, 1);
+renderer.setClearColor( 0x363636, 1);
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
