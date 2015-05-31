@@ -72,6 +72,7 @@ function unzip_file($filename, $extractDir){
 */
 function server_response($status, $response){
 	$json;
+
 	if( $status === "fail" || $status === "error" ){
 		$json = array(
 			"status" => $status, 
@@ -90,6 +91,7 @@ function server_response($status, $response){
 		);
 	}
 
+	header('Content-Type: application/json');
 	echo json_encode( $json );
 }
 
@@ -120,8 +122,11 @@ if( $_SERVER["REQUEST_METHOD"] === "POST" ){
 						"mtl" => $mtl_path
 					)
 				);
+				exit();
 
 			}
+		}else{
+			server_response("error", "Can't unzip file");
 		}
 	}else{
 

@@ -108,15 +108,14 @@ var loadObj = function(e){
 	xhr.onload = function () {
 		console.log(xhr);
 		if (xhr.status === 200) {
-			token = xhr.responseText;
-			console.log("Upload success");
-			console.log(token.responseText);
+			var response = JSON.parse(xhr.responseText);
+
+			var obj = "uploads/" + response.data.token + "/" + response.data.obj;
+			var mtl = "uploads/" + response.data.token + "/" + response.data.mtl;
+			loader(obj, mtl);
 
 			var menu = document.getElementById("rotation-menu");
 			menu.className = menu.className.replace("hidden", "");
-
-			//var objUrl = "uploads/" + token + "/" + file.name;
-			//loader(objUrl, "");
 
 		} else {
 			swal({
