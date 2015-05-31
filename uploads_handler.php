@@ -5,18 +5,22 @@
 */
 function upload_zip($token, $zip_file){
 	$flag = false;
-	// Get file extension
-	$ext = strtolower(pathinfo($_FILES["zip_file"]["name"], PATHINFO_EXTENSION));
 
-	// Path where zip will be uploaded
-	$path = __DIR__ . "/uploads/" . $token;
+	if( $_FILES["zip_file"]["error"] === 0 ){
+	
+		// Get file extension
+		$ext = strtolower(pathinfo($_FILES["zip_file"]["name"], PATHINFO_EXTENSION));
 
-	if( $ext === "zip"  &&  mkdir( $path ) ){
-		
-		chdir($path);
+		// Path where zip will be uploaded
+		$path = __DIR__ . "/uploads/" . $token;
 
-		if( move_uploaded_file( $_FILES["zip_file"]["tmp_name"], $zip_file ) ){
-			$flag = true;
+		if( $ext === "zip"  &&  mkdir( $path ) ){
+			
+			chdir($path);
+
+			if( move_uploaded_file( $_FILES["zip_file"]["tmp_name"], $zip_file ) ){
+				$flag = true;
+			}
 		}
 	}
 	return $flag;
@@ -62,7 +66,34 @@ function unzip_file($filename, $extractDir){
 	return $flag;
 }
 
-if( $_SERVER["REQUEST_METHOD"] === "POST" && $_FILES["zip_file"]["error"] === 0 ){
+/*
+	$status => Status response
+	$resposne => Can be a message (error, fail) or an object with return data (success).
+*/
+function server_response($status, $response){
+	$json;
+	if( $status === "fail" || $status === "error" ){
+		$json = array(
+			"status" => $status, 
+			"message" => $response
+		);
+	}
+	elseif ( $status === "success" ) {
+		$json = array(
+			"status" => $status, 
+			"data" => $response
+		);
+	}else{
+		$json = array(
+			"status" => "error", 
+			"message" => "unknown error"
+		);
+	}
+
+	echo json_encode( $json );
+}
+
+if( $_SERVER["REQUEST_METHOD"] === "POST" ){
 
 	$token = bin2hex(openssl_random_pseudo_bytes(16));
 	$zip_file = "file.zip";
@@ -77,32 +108,25 @@ if( $_SERVER["REQUEST_METHOD"] === "POST" && $_FILES["zip_file"]["error"] === 0 
 			
 			// Obj not found
 			if( is_null( $obj_path ) ){
-				echo json_encode( 
-					array(
-						"status" => "fail", 
-						"message" => ".obj file not found"
-					)
-				);
+
+				server_response("fail", ".obj file not found");
+
 			}else{ // Obj found
-				echo json_encode( 
+
+				server_response("success", 
 					array(
-						"status" => "success", 
-						"data" => array(
-							"token" => $token,
-							"obj" => $obj_path,
-							"mtl" => $mtl_path
-						)
+						"token" => $token,
+						"obj" => $obj_path,
+						"mtl" => $mtl_path
 					)
 				);
+
 			}
 		}
 	}else{
-		echo json_encode( 
-			array(
-				"status" => "fail", 
-				"message" => "Invalid file extension"
-			)
-		);
+
+		server_response("fail", "Invalid file extension");
+		
 	}		
 	exit();
 
