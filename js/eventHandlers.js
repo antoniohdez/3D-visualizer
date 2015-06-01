@@ -75,13 +75,33 @@ var validateFileExtension = function(filename){
 	return true;
 }
 
-var loadObj = function(e){
+var changeDOMBeforeLoad = function(){
+	var animatedLoader = document.getElementById('loader-animated');
+	animatedLoader.className = animatedLoader.className.replace(" hidden", "");
+
+	var fileButton = document.getElementById('file-button');
+	fileButton.className = fileButton.className + " hidden";
+}
+
+var changeDOMAfterLoad = function(status){
+	if (status === true) {
+		var menu = document.getElementById("rotation-menu");
+		menu.className = menu.className.replace("hidden", "");
+	}
+
+	var fileButton = document.getElementById('file-button');
+	fileButton.className = fileButton.className.replace(" hidden", "");
+
+	var animatedLoader = document.getElementById('loader-animated');
+	animatedLoader.className = animatedLoader.className + " hidden";
+}
+
+var prepareFile = function(e){
 	if( e.target.files.length !== 1 ){
-		return;
+		return {status : false, data : undefined};
 	}
 	
-	var input = document.getElementById('obj-loader');
-	var files = input.files;
+	var files = document.getElementById('obj-loader').files;
 	var file = files[0];
 
 	if( validateFileExtension(file.name) === false ){
@@ -89,43 +109,51 @@ var loadObj = function(e){
 			title: "Selecciona un archivo .zip válido", 
 			type: "warning"
 		});
-		return;
+		return {status : false, data : undefined};
 	}
 
-	var animatedLoader = document.getElementById('loader-animated');
-	animatedLoader.className = animatedLoader.className.replace(" hidden", "");
-
-	var fileButton = document.getElementById('file-button');
-	fileButton.className = fileButton.className + " hidden";
-
 	var formData = new FormData();
-	// User obj-loader (button) to load a .zip file
 	formData.append('zip_file', file, file.name);
+
+	return {status : true, data : formData};
+}
+
+var loadObj = function(e){
+	var data = prepareFile(e);
+	var formData;
+
+	if(data["status"] === true){
+		formData = data["data"];
+	}else{
+		return;
+	}
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'uploads_handler.php', true);
 
 	xhr.onload = function () {
 		console.log(xhr);
+		
+		var response = JSON.parse(xhr.responseText);
+
 		if (xhr.status === 200) {
-			var response = JSON.parse(xhr.responseText);
+			
+			if(response.status === "success"){
+				var obj = "uploads/" + response.data.token + "/" + response.data.obj;
+				var mtl = "uploads/" + response.data.token + "/" + response.data.mtl;
+				loader(obj, mtl);
 
-			var obj = "uploads/" + response.data.token + "/" + response.data.obj;
-			var mtl = "uploads/" + response.data.token + "/" + response.data.mtl;
-			loader(obj, mtl);
+				changeDOMAfterLoad(true);
 
-			var menu = document.getElementById("rotation-menu");
-			menu.className = menu.className.replace("hidden", "");
-
-		} else {
-			swal({
-				title: "Ocurrió un error, intenta de nuevo", 
-				type: "error"
-			});
-			console.log('An error occurred!');
-		}
-		fileButton.className = fileButton.className.replace(" hidden", "");
-		animatedLoader.className = animatedLoader.className + " hidden";
+				return;
+			}
+		} 
+		swal({
+			title: response.message, 
+			type: "error"
+		});
+		changeDOMAfterLoad(false);
+		
 	};
 
 	xhr.send(formData);

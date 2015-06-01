@@ -46,6 +46,9 @@ function find_file($ext, $dir){
 			}
 		}
 	}
+	if( is_null($path) ){
+		return $path;
+	}
 	return (string)$path;
 }
 
@@ -74,6 +77,7 @@ function server_response($status, $response){
 	$json;
 
 	if( $status === "fail" || $status === "error" ){
+		http_response_code(500);
 		$json = array(
 			"status" => $status, 
 			"message" => $response
@@ -85,6 +89,7 @@ function server_response($status, $response){
 			"data" => $response
 		);
 	}else{
+		http_response_code(500);
 		$json = array(
 			"status" => "error", 
 			"message" => "unknown error"
@@ -110,11 +115,9 @@ if( $_SERVER["REQUEST_METHOD"] === "POST" ){
 			
 			// Obj not found
 			if( is_null( $obj_path ) ){
-
 				server_response("fail", ".obj file not found");
 
 			}else{ // Obj found
-
 				server_response("success", 
 					array(
 						"token" => $token,
@@ -129,14 +132,9 @@ if( $_SERVER["REQUEST_METHOD"] === "POST" ){
 			server_response("error", "Can't unzip file");
 		}
 	}else{
-
-		server_response("fail", "Invalid file extension");
-		
+		server_response("fail", "Invalid file extension");	
 	}		
 	exit();
-
 }
-
 http_response_code(500);
-
 ?>
