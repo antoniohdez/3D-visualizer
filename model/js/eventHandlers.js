@@ -65,16 +65,6 @@ var rightRotationUp = function (){
 
 var token;
 
-var validateFileExtension = function(filename){
-	filename = filename.toLowerCase();
-	var ext = filename.split(".").pop();
-	// Check file extension, or check if possible fake zip (hidden file or filename = zip with no extension).
-	if(ext !== "zip" || filename === "zip" || filename === ".zip" ){
-		return false;
-	}
-	return true;
-}
-
 var changeDOMBeforeLoad = function(){
 	var animatedLoader = document.getElementById('loader-animated');
 	animatedLoader.className = animatedLoader.className.replace(" hidden", "");
@@ -96,54 +86,10 @@ var changeDOMAfterLoad = function(status){
 	animatedLoader.className = animatedLoader.className + " hidden";
 }
 
-var changeEmbedCode = function(token){
-	if (token == "none"){
-		var embedMenu = document.getElementById('embed-menu');
-		embedMenu.className = embedMenu.className + " hidden";
-		
-	}else{
-		var embedMenu = document.getElementById('embed-menu');
-		embedMenu.className = embedMenu.className.replace(" hidden", "");
-
-		var textCode = document.getElementById("code-text");
-		textCode.innerText = '<embed src="http://localhost/3d-visualizer/model/?token="' + token + '">';
-	}
-}
-
-var prepareFile = function(e){
-	if( e.target.files.length !== 1 ){
-		return {status : false, data : undefined};
-	}
-	
-	var files = document.getElementById('obj-loader').files;
-	var file = files[0];
-
-	if( validateFileExtension(file.name) === false ){
-		swal({
-			title: "Selecciona un archivo .zip válido", 
-			type: "warning"
-		});
-		return {status : false, data : undefined};
-	}
-
-	var formData = new FormData();
-	formData.append('zip_file', file, file.name);
-
-	return {status : true, data : formData};
-}
-
-var loadObj = function(e){
-	var data = prepareFile(e);
-	var formData;
-
-	if(data["status"] === true){
-		formData = data["data"];
-	}else{
-		return;
-	}
+var loadObj = function(){
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'uploads_handler.php', true);
+	xhr.open('GET', 'model_handler.php?token=' + urlToken, true);
 
 	xhr.onload = function () {
 		console.log(xhr);
@@ -153,12 +99,11 @@ var loadObj = function(e){
 		if (xhr.status === 200) {
 			
 			if(response.status === "success"){
-				var obj = "u/" + response.data.token + "/" + response.data.obj;
-				var mtl = "u/" + response.data.token + "/" + response.data.mtl;
+				var obj = "../" + response.data.token + "/" + response.data.obj;
+				var mtl = "../" + response.data.token + "/" + response.data.mtl;
 				loader(obj, mtl);
 
 				changeDOMAfterLoad(true);
-				changeEmbedCode(response.data.token);
 
 				return;
 			}
@@ -168,10 +113,11 @@ var loadObj = function(e){
 			type: "error"
 		});
 		changeDOMAfterLoad(false);
-		changeEmbedCode("none");
 		
 	};
 
-	xhr.send(formData);
+	xhr.send();
 
 }
+
+window.onload = loadObj;

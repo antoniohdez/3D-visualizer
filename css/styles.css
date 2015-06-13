@@ -33,6 +33,13 @@ button:hover, .file-input:hover{
 	display: none;
 }
 
+#embed-container{
+	background: white;
+	display: inline-block;
+	margin: .5em 0 .5em .5em;
+	padding: .75em;
+}
+
 .zoom-menu{
 	position: absolute;
 	right: 1em;
@@ -52,5 +59,11 @@ button:hover, .file-input:hover{
 .loader-menu{
 	position: absolute;
 	left: 1em;
+	bottom: 1em;
+}
+
+.embed-menu{
+	position: absolute;
+	right: 1em;
 	bottom: 1em;
 }
