@@ -12,7 +12,7 @@ function upload_zip($token, $zip_file){
 		$ext = strtolower(pathinfo($_FILES["zip_file"]["name"], PATHINFO_EXTENSION));
 
 		// Path where zip will be uploaded
-		$path = __DIR__ . "/uploads/" . $token;
+		$path = __DIR__ . "/u/" . $token;
 
 		if( $ext === "zip"  &&  mkdir( $path ) ){
 			

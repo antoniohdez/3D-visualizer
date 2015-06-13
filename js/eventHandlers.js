@@ -139,11 +139,12 @@ var loadObj = function(e){
 		if (xhr.status === 200) {
 			
 			if(response.status === "success"){
-				var obj = "uploads/" + response.data.token + "/" + response.data.obj;
-				var mtl = "uploads/" + response.data.token + "/" + response.data.mtl;
+				var obj = "u/" + response.data.token + "/" + response.data.obj;
+				var mtl = "u/" + response.data.token + "/" + response.data.mtl;
 				loader(obj, mtl);
 
 				changeDOMAfterLoad(true);
+				changeLoadEmbedCode(response.data.token);
 
 				return;
 			}
