@@ -142,6 +142,8 @@ var loadObj = function(e){
 		return;
 	}
 
+	changeDOMBeforeLoad();
+
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'uploads_handler.php', true);
 
