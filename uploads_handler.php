@@ -69,6 +69,20 @@ function unzip_file($filename, $extractDir){
 	return $flag;
 }
 
+function deleteInvalidUpload($dir){
+	chdir(__DIR__ . "/u/");
+	// delete folder where dirname = $token
+	// $token;
+	
+	$it = new RecursiveDirectoryIterator($dir);
+	foreach(new RecursiveIteratorIterator($it) as $file){
+		if( is_file($file) ){
+			unlink($file);	
+		}
+	}
+
+}
+
 /*
 	$status => Status response
 	$resposne => Can be a message (error, fail) or an object with return data (success).
@@ -115,6 +129,7 @@ if( $_SERVER["REQUEST_METHOD"] === "POST" ){
 			
 			// Obj not found
 			if( is_null( $obj_path ) ){
+				deleteInvalidUpload($token);
 				server_response("fail", ".obj file not found");
 
 			}else{ // Obj found
