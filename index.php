@@ -39,5 +39,9 @@
 	<script src="js/loader.js"></script>
 	<script src="js/eventHandlers.js"></script>
 	<script src="js/canvasUI.js"></script>
+
+	<!-- Clipboard plugin -->
+	<script src="lib/clipboard/ZeroClipboard.js"></script>
+	<script src="js/clipboard.js"></script>
 </body>
 </html>

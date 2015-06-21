@@ -13,14 +13,6 @@ camera.position.z = 100;
 //camera.lookAt(scene.position);
 
 /*
-	CONTROLS
-*/
-
-//Move around Y axis by default
-var controls = new THREE.OrbitControls( camera );
-controls.addEventListener('change', render );
-
-/*
 	AMBIENT LIGHT
 */
 
@@ -36,6 +28,14 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setClearColor( 0x363636, 1);
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
+
+/*
+	CONTROLS
+*/
+
+//Move around Y axis by default
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
+controls.addEventListener('change', render );
 
 /*
 	RESIZE LISTENER

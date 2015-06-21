@@ -1,6 +1,9 @@
 html, body { 
 	margin: 0px;
 	overflow: hidden;
+	-webkit-user-select: none; /* Chrome/Safari */        
+	   -moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* IE10+ */
 }
 
 canvas {
@@ -21,7 +24,10 @@ button, .file-input{
 	margin: .5em;
 }
 
-button:hover, .file-input:hover{
+button:hover, 
+.file-input:hover, 
+.file-input.zeroclipboard-is-hover, 
+.file-input.zeroclipboard-is-active{
 	background: #196FC5;
 }
 
@@ -35,6 +41,7 @@ button:hover, .file-input:hover{
 
 #embed-container{
 	background: white;
+	cursor: default;
 	display: inline-block;
 	margin: .5em 0 .5em .5em;
 	padding: .75em;

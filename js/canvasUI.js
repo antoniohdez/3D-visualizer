@@ -157,14 +157,13 @@ var createEmbedMenu = function(){
 	loaderMenu.id = "embed-menu";
 	loaderMenu.className = "embed-menu hidden";
 
-	/* Load .obj rotation button */
 	var embedContainer = (function(){
 		var embedContainer = document.createElement("div");
 		embedContainer.id = "embed-container";
 
 		var text = document.createElement("span");
 		text.id = "code-text";
-		text.innerHTML = "Copy code";
+		text.innerHTML = ""; //Url text
 
 		embedContainer.appendChild(text);
 		
@@ -179,19 +178,14 @@ var createEmbedMenu = function(){
 		
 		var text = document.createElement("span");
 		text.id = "file-text";
-		text.innerHTML = "&nbsp; Copy code"
+		text.innerHTML = "&nbsp; Copy url"
 
 		var inputContainer = document.createElement("span");
-		inputContainer.id = "file-button";
+		inputContainer.id = "copy-button";
 		inputContainer.className = "file-input";
 		
 		inputContainer.appendChild(icon);
 		inputContainer.appendChild(text);
-
-		
-		inputContainer.addEventListener("click", function(){
-			
-		});
 
 		return inputContainer;
 	})();

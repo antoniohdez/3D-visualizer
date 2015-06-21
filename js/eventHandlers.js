@@ -75,38 +75,37 @@ var validateFileExtension = function(filename){
 	return true;
 }
 
-var changeDOMBeforeLoad = function(){
-	var animatedLoader = document.getElementById('loader-animated');
-	animatedLoader.className = animatedLoader.className.replace(" hidden", "");
+var hideElement = function(selector, hide){
+	var element = document.getElementById(selector);
+	if(hide){
+		element.className = element.className.replace(" hidden", "");	
+	}else{
+		element.className = element.className + " hidden";
+	}
+}
 
-	var fileButton = document.getElementById('file-button');
-	fileButton.className = fileButton.className + " hidden";
+var changeDOMBeforeLoad = function(){
+	hideElement("loader-animated", true); //Hide
+	hideElement("file-button", false); //Show
 }
 
 var changeDOMAfterLoad = function(status){
 	if (status === true) {
-		var menu = document.getElementById("rotation-menu");
-		menu.className = menu.className.replace("hidden", "");
+		hideElement("rotation-menu", true); //Hide
 	}
 
-	var fileButton = document.getElementById('file-button');
-	fileButton.className = fileButton.className.replace(" hidden", "");
-
-	var animatedLoader = document.getElementById('loader-animated');
-	animatedLoader.className = animatedLoader.className + " hidden";
+	hideElement("file-button", true);	//Hide
+	hideElement("loader-animated", false); //Show
 }
 
 var changeEmbedCode = function(token){
 	if (token == "none"){
-		var embedMenu = document.getElementById('embed-menu');
-		embedMenu.className = embedMenu.className + " hidden";
-		
+		hideElement("embed-menu", false);
 	}else{
-		var embedMenu = document.getElementById('embed-menu');
-		embedMenu.className = embedMenu.className.replace(" hidden", "");
+		hideElement("embed-menu", true);
 
 		var textCode = document.getElementById("code-text");
-		textCode.innerText = '<embed src="http://localhost/3d-visualizer/model/?token="' + token + '">';
+		textCode.innerText = 'http://localhost/3d-visualizer/model/?token=' + token;
 	}
 }
 
