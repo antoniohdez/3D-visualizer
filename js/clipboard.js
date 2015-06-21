@@ -6,6 +6,7 @@ client.on( "ready", function( readyEvent ) {
 		event.clipboardData.setData('text/plain', document.getElementById("code-text").innerHTML);
 		swal({
 			title: "Copied to clipboard!", 
+			text: document.getElementById("code-text").innerHTML,
 			type: "success"
 		});
 	});
