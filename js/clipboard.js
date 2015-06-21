@@ -7,7 +7,8 @@ client.on( "ready", function( readyEvent ) {
 		swal({
 			title: "Copied to clipboard!", 
 			text: document.getElementById("code-text").innerHTML,
-			type: "success"
+			type: "success",
+			confirmButtonColor: "#297FD5"
 		});
 	});
 

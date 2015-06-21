@@ -120,7 +120,8 @@ var prepareFile = function(e){
 	if( validateFileExtension(file.name) === false ){
 		swal({
 			title: "Selecciona un archivo .zip válido", 
-			type: "warning"
+			type: "warning",
+			confirmButtonColor: "#297FD5"
 		});
 		return {status : false, data : undefined};
 	}
@@ -166,7 +167,8 @@ var loadObj = function(e){
 		} 
 		swal({
 			title: response.message, 
-			type: "error"
+			type: "error",
+			confirmButtonColor: "#297FD5"
 		});
 		changeDOMAfterLoad(false);
 		changeEmbedCode("none");
