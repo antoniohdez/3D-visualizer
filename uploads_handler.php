@@ -71,16 +71,18 @@ function unzip_file($filename, $extractDir){
 
 function deleteInvalidUpload($dir){
 	chdir(__DIR__ . "/u/");
-	// delete folder where dirname = $token
-	// $token;
-	
-	$it = new RecursiveDirectoryIterator($dir);
-	foreach(new RecursiveIteratorIterator($it) as $file){
-		if( is_file($file) ){
-			unlink($file);	
+
+	$it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+	$files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+	foreach($files as $file) {
+		if ($file->isDir()){
+			rmdir($file->getRealPath());
+		} else {
+			unlink($file->getRealPath());
 		}
 	}
 
+	rmdir($dir);
 }
 
 /*
