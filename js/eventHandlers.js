@@ -105,7 +105,7 @@ var changeEmbedCode = function(token){
 		hideElement("embed-menu", true);
 
 		var textCode = document.getElementById("code-text");
-		textCode.innerText = 'http://localhost/3d-visualizer/model/?token=' + token;
+		textCode.innerText = 'http://connectar.co/3D/model/?token=' + token;
 	}
 }
 
