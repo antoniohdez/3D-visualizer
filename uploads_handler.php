@@ -35,8 +35,8 @@ function find_file($ext, $dir){
 	$path = NULL;
 	foreach(new RecursiveIteratorIterator($it) as $file)
 	{
-
-		if( in_array( strtolower( array_pop( explode( ".", $file ) ) ), $display) ){
+		$filename_array = explode(".", $file);
+		if( in_array( strtolower( array_pop( $filename_array ) ), $display) ){
 				
 			if ( is_null( $path ) ) {
 				$path = $file;
