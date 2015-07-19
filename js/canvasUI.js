@@ -174,11 +174,10 @@ var createEmbedMenu = function(){
 
 		var icon = document.createElement("i");
 		icon.id = "file-icon";
-		icon.className = "fa fa-copy";
+		icon.className = "fa fa-question-circle";
 		
 		var text = document.createElement("span");
 		text.id = "file-text";
-		text.innerHTML = "&nbsp; Copy url"
 
 		var inputContainer = document.createElement("span");
 		inputContainer.id = "copy-button";

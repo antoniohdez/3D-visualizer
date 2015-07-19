@@ -5,9 +5,9 @@ client.on( "ready", function( readyEvent ) {
 	client.on( "copy", function( event ) {
 		event.clipboardData.setData('text/plain', document.getElementById("code-text").innerHTML);
 		swal({
-			title: "Copied to clipboard!", 
+			title: "Copy this url to see it later!", 
 			text: document.getElementById("code-text").innerHTML,
-			type: "success",
+			type: "info",
 			confirmButtonColor: "#297FD5"
 		});
 	});
@@ -16,8 +16,10 @@ client.on( "ready", function( readyEvent ) {
 		// console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
 		ZeroClipboard.destroy();
 		swal({
-			title: "Couldn't copy url to clipboard!", 
-			type: "error"
+			title: "Copy this url to see it later!", 
+			text: document.getElementById("code-text").innerHTML,
+			type: "info",
+			confirmButtonColor: "#297FD5"
 		});
 	});
 
